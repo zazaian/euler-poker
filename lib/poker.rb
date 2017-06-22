@@ -1,5 +1,5 @@
 require "poker/version"
+require "poker/card"
 
 module Poker
-  # Your code goes here...
 end
