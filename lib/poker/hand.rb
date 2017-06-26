@@ -25,10 +25,12 @@ module Poker
 
     def royal_flush
       # Five cards in a sequence, all of the same suit, that includes a high ace.
+      straight_flush && ace_high
     end
 
     def straight_flush
       # Five cards in a sequence, all of the same suit.
+      straight && flush
     end
 
     def four_of_a_kind
@@ -86,6 +88,10 @@ module Poker
       @sorted_ranks ||= cards.collect {|c| c.rank }.sort do |x, y|
         Card::RANKS.index(x) <=> Card::RANKS.index(y)
       end
+    end
+
+    def ace_high
+      sorted_ranks.last == "A"
     end
 
     private
