@@ -107,6 +107,24 @@ describe Poker::Hand do
     expect(hand.best_hand).to eq :royal_flush
   end
 
+  it "can identify the pairs in a hand" do
+    # full house, a two-pair and a three-pair
+    hand = described_class.new %w[4D 4H 4C 8C 8D]
+
+    pair1 = hand.all_pairs[2].first
+    expect([
+      pair1.first.rank,
+      pair1.last.rank
+    ]).to eq %w[8 8]
+
+    pair2 = hand.all_pairs[3].first
+    expect([
+      pair2.first.rank,
+      pair2[1].rank,
+      pair2.last.rank
+    ]).to eq %w[4 4 4]
+  end
+
   it "has a best hand index" do
     # royal flush
     hand = described_class.new %w[TS JS QS KS AS]
