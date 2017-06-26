@@ -19,4 +19,10 @@ describe Poker::Hand do
     hand3 = %w[8S 8D 9S 9D TH AC]
     expect { described_class.new(hand3) }.to raise_error(cards_error)
   end
+
+  it "can identify two of a kind" do
+    # two eights
+    hand = described_class.new %w[8S 8D 7S 9D TH]
+    expect(hand.two_of_a_kind).to eq true
+  end
 end

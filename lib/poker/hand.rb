@@ -58,11 +58,17 @@ module Poker
 
     def two_of_a_kind
       # Two cards of one rank, plus three cards which are not this rank nor the same.
+      n_of_a_kind?(2, size: 1)
     end
 
     def high_card
       # Any hand not meeting the above requirements.
       true
+    end
+
+    def n_of_a_kind?(n, size: 1)
+      kinds = cards.group_by(&:rank).values.group_by(&:size)
+      kinds[n] && kinds[n].size == size
     end
 
     private
