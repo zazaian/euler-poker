@@ -37,7 +37,8 @@ module Poker
     end
 
     def full_house
-      # Three matching cards of one rank and two matching cards of another rank.
+      # Three matchi@ng cards of one rank and two matching cards of another rank.
+      two_of_a_kind && three_of_a_kind
     end
 
     def flush

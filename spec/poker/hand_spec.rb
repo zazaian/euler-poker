@@ -71,4 +71,10 @@ describe Poker::Hand do
     hand = described_class.new %w[2S 9S TS AS 5S]
     expect(hand.flush).to eq true
   end
+
+  it "can identify a full house" do
+    # all spades
+    hand = described_class.new %w[2S 2D 2H AS AH]
+    expect(hand.full_house).to eq true
+  end
 end
