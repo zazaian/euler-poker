@@ -74,6 +74,16 @@ module Poker
       kinds[n] && kinds[n].size == size
     end
 
+    def consecutive?
+      Card::RANKS.join.include?(sorted_hand_ranks.join)
+    end
+
+    def sorted_hand_ranks
+      @sorted_hand_ranks ||= cards.collect {|c| c.rank }.sort do |x, y|
+        Card::RANKS.index(x) <=> Card::RANKS.index(y)
+      end
+    end
+
     private
 
     def cards_error(cards_num)

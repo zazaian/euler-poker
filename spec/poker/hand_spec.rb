@@ -43,4 +43,14 @@ describe Poker::Hand do
     hand = described_class.new %w[8S 8D 8C 8H TH]
     expect(hand.four_of_a_kind).to eq true
   end
+
+  it "can identify a consecutive set" do
+    hand = described_class.new %w[2S 3D 4C 5H 6H]
+    expect(hand.consecutive?).to eq true
+  end
+
+  it "can identify a non-consecutive set" do
+    hand = described_class.new %w[2S 9D TC AH 5H]
+    expect(hand.consecutive?).to eq false
+  end
 end
