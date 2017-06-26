@@ -84,8 +84,11 @@ module Poker
     end
 
     def n_of_a_kind?(n, size: 1)
-      kinds = cards.group_by(&:rank).values.group_by(&:size)
-      kinds[n] && kinds[n].size == size
+      all_pairs[n] && all_pairs[n].size == size
+    end
+
+    def all_pairs
+      @all_pairs ||= cards.group_by(&:rank).values.group_by(&:size)
     end
 
     def consecutive?
