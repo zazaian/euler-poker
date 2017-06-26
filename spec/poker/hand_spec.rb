@@ -25,4 +25,16 @@ describe Poker::Hand do
     hand = described_class.new %w[8S 8D 7S 9D TH]
     expect(hand.two_of_a_kind).to eq true
   end
+
+  it "can identify two pair" do
+    # two eights, two sevens
+    hand = described_class.new %w[8S 8D 7S 7D TH]
+    expect(hand.two_pair).to eq true
+  end
+
+  it "can identify three of a kind" do
+    # three eights
+    hand = described_class.new %w[8S 8D 8C 7D TH]
+    expect(hand.three_of_a_kind).to eq true
+  end
 end

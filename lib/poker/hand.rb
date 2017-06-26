@@ -50,10 +50,12 @@ module Poker
     def three_of_a_kind
       # Three cards of the same rank, with two cards not of this rank nor the same as each other.
       # Two cards of one rank, plus three cards which are not this rank nor the same.
+      n_of_a_kind?(3, size: 1)
     end
 
     def two_pair
       # Two cards of the same rank, plus two cards of another rank.
+      n_of_a_kind?(2, size: 2)
     end
 
     def two_of_a_kind
