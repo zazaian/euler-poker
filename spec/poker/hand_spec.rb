@@ -53,4 +53,12 @@ describe Poker::Hand do
     hand = described_class.new %w[2S 9D TC AH 5H]
     expect(hand.consecutive?).to eq false
   end
+
+  it "can identify a straight" do
+    hand = described_class.new %w[2S 3D 4C 5H 6H]
+    expect(hand.straight).to eq true
+
+    hand = described_class.new %w[TS JD KC QH AH]
+    expect(hand.straight).to eq true
+  end
 end

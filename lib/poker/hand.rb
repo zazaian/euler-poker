@@ -46,6 +46,7 @@ module Poker
 
     def straight
       # Five cards of sequential rank in at least two different suits.
+      consecutive?
     end
 
     def three_of_a_kind
