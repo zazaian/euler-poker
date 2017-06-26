@@ -10,7 +10,7 @@ module Poker
       end
     end
 
-    def rank
+    def rank_methods
       [:royal_flush,
        :straight_flush,
        :four_of_a_kind,
@@ -20,7 +20,15 @@ module Poker
        :three_of_a_kind,
        :two_pair,
        :two_of_a_kind,
-       :high_card].find(&self.method(:send))
+       :high_card]
+    end
+
+    def rank
+      @rank ||= rank_methods.find(&self.method(:send))
+    end
+
+    def rank_index
+      rank_methods.index(rank)
     end
 
     def royal_flush

@@ -106,4 +106,18 @@ describe Poker::Hand do
     expect(hand.royal_flush).to eq true
     expect(hand.rank).to eq :royal_flush
   end
+
+  it "has a rank index" do
+    # royal flush
+    hand = described_class.new %w[TS JS QS KS AS]
+    expect(hand.rank_index).to eq 0
+
+    # four of a kind
+    hand = described_class.new %w[8S 8D 8C 8H TH]
+    expect(hand.rank_index).to eq 2
+
+    # two pair
+    hand = described_class.new %w[8S 8D 7S 7D TH]
+    expect(hand.rank_index).to eq 7
+  end
 end
