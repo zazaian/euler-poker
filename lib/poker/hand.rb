@@ -33,6 +33,7 @@ module Poker
 
     def four_of_a_kind
       # All four cards of one rank, and any other unmatched card.
+      n_of_a_kind?(4, size: 1)
     end
 
     def full_house
