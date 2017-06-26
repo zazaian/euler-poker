@@ -5,10 +5,9 @@ module Poker
 
     attr_reader :rank, :suit
 
-    def initialize(card_symbol)
-      @rank = card_symbol[0]
-      @suit = card_symbol[1]
+    def initialize(card_chars)
+      @rank = card_chars[0]
+      @suit = card_chars[1]
     end
-
   end
 end
