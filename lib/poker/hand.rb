@@ -10,7 +10,7 @@ module Poker
       end
     end
 
-    def rank_methods
+    def best_hand_methods
       [:royal_flush,
        :straight_flush,
        :four_of_a_kind,
@@ -23,12 +23,12 @@ module Poker
        :high_card]
     end
 
-    def rank
-      @rank ||= rank_methods.find(&self.method(:send))
+    def best_hand
+      @best_hand ||= best_hand_methods.find(&self.method(:send))
     end
 
-    def rank_index
-      rank_methods.index(rank)
+    def best_hand_index
+      best_hand_methods.index(best_hand)
     end
 
     def royal_flush

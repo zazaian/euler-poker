@@ -23,35 +23,35 @@ describe Poker::Hand do
   it "can identify a high-card-only hand" do
     # high card only
     hand = described_class.new %w[3S 8D 7S 9D TH]
-    expect(hand.rank).to eq :high_card
+    expect(hand.best_hand).to eq :high_card
   end
 
   it "can identify two of a kind" do
     # two eights
     hand = described_class.new %w[8S 8D 7S 9D TH]
     expect(hand.two_of_a_kind).to eq true
-    expect(hand.rank).to eq :two_of_a_kind
+    expect(hand.best_hand).to eq :two_of_a_kind
   end
 
   it "can identify two pair" do
     # two eights, two sevens
     hand = described_class.new %w[8S 8D 7S 7D TH]
     expect(hand.two_pair).to eq true
-    expect(hand.rank).to eq :two_pair
+    expect(hand.best_hand).to eq :two_pair
   end
 
   it "can identify three of a kind" do
     # three eights
     hand = described_class.new %w[8S 8D 8C 7D TH]
     expect(hand.three_of_a_kind).to eq true
-    expect(hand.rank).to eq :three_of_a_kind
+    expect(hand.best_hand).to eq :three_of_a_kind
   end
 
   it "can identify four of a kind" do
     # four eights
     hand = described_class.new %w[8S 8D 8C 8H TH]
     expect(hand.four_of_a_kind).to eq true
-    expect(hand.rank).to eq :four_of_a_kind
+    expect(hand.best_hand).to eq :four_of_a_kind
   end
 
   it "can identify a consecutive set" do
@@ -64,60 +64,60 @@ describe Poker::Hand do
     # random cards, not a straight
     hand = described_class.new %w[2S 9D TC AH 5H]
     expect(hand.consecutive?).to eq false
-    expect(hand.rank).to eq :high_card
+    expect(hand.best_hand).to eq :high_card
   end
 
   it "can identify a straight" do
     # 2-6 straight
     hand = described_class.new %w[2S 3D 4C 5H 6H]
     expect(hand.straight).to eq true
-    expect(hand.rank).to eq :straight
+    expect(hand.best_hand).to eq :straight
 
     # ten-to-ace straight
     hand = described_class.new %w[TS JD KC QH AH]
     expect(hand.straight).to eq true
-    expect(hand.rank).to eq :straight
+    expect(hand.best_hand).to eq :straight
   end
 
   it "can identify a flush" do
     # all spades
     hand = described_class.new %w[2S 9S TS AS 5S]
     expect(hand.flush).to eq true
-    expect(hand.rank).to eq :flush
+    expect(hand.best_hand).to eq :flush
   end
 
   it "can identify a full house" do
     # three twos, two aces
     hand = described_class.new %w[2S 2D 2H AS AH]
     expect(hand.full_house).to eq true
-    expect(hand.rank).to eq :full_house
+    expect(hand.best_hand).to eq :full_house
   end
 
   it "can identify a straight flush" do
     # 2-6, all spades
     hand = described_class.new %w[2S 3S 4S 5S 6S]
     expect(hand.straight_flush).to eq true
-    expect(hand.rank).to eq :straight_flush
+    expect(hand.best_hand).to eq :straight_flush
   end
 
   it "can identify a royal flush" do
     # ten to ace, all spades
     hand = described_class.new %w[TS JS QS KS AS]
     expect(hand.royal_flush).to eq true
-    expect(hand.rank).to eq :royal_flush
+    expect(hand.best_hand).to eq :royal_flush
   end
 
-  it "has a rank index" do
+  it "has a best hand index" do
     # royal flush
     hand = described_class.new %w[TS JS QS KS AS]
-    expect(hand.rank_index).to eq 0
+    expect(hand.best_hand_index).to eq 0
 
     # four of a kind
     hand = described_class.new %w[8S 8D 8C 8H TH]
-    expect(hand.rank_index).to eq 2
+    expect(hand.best_hand_index).to eq 2
 
     # two pair
     hand = described_class.new %w[8S 8D 7S 7D TH]
-    expect(hand.rank_index).to eq 7
+    expect(hand.best_hand_index).to eq 7
   end
 end
