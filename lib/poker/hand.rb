@@ -42,6 +42,8 @@ module Poker
 
     def flush
       # All five cards of the same suit, but not in a sequence.
+      flush_suit = cards.first.suit
+      cards.all? {|card| card.suit == flush_suit }
     end
 
     def straight
@@ -76,11 +78,11 @@ module Poker
     end
 
     def consecutive?
-      Card::RANKS.join.include?(sorted_hand_ranks.join)
+      Card::RANKS.join.include?(sorted_ranks.join)
     end
 
-    def sorted_hand_ranks
-      @sorted_hand_ranks ||= cards.collect {|c| c.rank }.sort do |x, y|
+    def sorted_ranks
+      @sorted_ranks ||= cards.collect {|c| c.rank }.sort do |x, y|
         Card::RANKS.index(x) <=> Card::RANKS.index(y)
       end
     end
