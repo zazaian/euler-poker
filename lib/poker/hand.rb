@@ -102,6 +102,18 @@ module Poker
       sorted_ranks.last == "A"
     end
 
+    def highest_card_index
+      Card::RANKS.index(sorted_ranks.last)
+    end
+
+    def better_than?(other_hand)
+      # check if this hand is better than the other hand
+      return true if best_hand_index < other_hand.best_hand_index
+
+      # if not, break the tie
+      TieBreaker.new(self, other_hand).winner == self
+    end
+
     private
 
     def cards_error(cards_num)
