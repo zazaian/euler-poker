@@ -39,18 +39,14 @@ module Poker
 
     def two_pair
       # hand1 sets
-      set1 = hand1.all_sets[2].first
-      set2 = hand1.all_sets[2].last
-      index1 = Hand.card_index(set1.first.rank)
-      index2 = Hand.card_index(set2.first.rank)
+      index1 = first_set_index(hand1, 2)
+      index2 = last_set_index(hand1, 2)
       hand1_high = [index1, index2].max
       hand1_low = [index1, index2].min
 
       # hand2 sets
-      set3 = hand2.all_sets[2].first
-      set4 = hand2.all_sets[2].last
-      index3 = Hand.card_index(set3.first.rank)
-      index4 = Hand.card_index(set4.first.rank)
+      index3 = first_set_index(hand2, 2)
+      index4 = last_set_index(hand2, 2)
       hand2_high = [index3, index4].max
       hand2_low = [index3, index4].min
 
@@ -68,11 +64,8 @@ module Poker
     end
 
     def n_of_a_kind(set_size)
-      set1 = hand1.all_sets[set_size].first
-      set2 = hand2.all_sets[set_size].first
-
-      index1 = Hand.card_index(set1.first.rank)
-      index2 = Hand.card_index(set2.first.rank)
+      index1 = first_set_index(hand1, set_size)
+      index2 = first_set_index(hand2, set_size)
 
       if index1 > index2
         hand1
@@ -81,6 +74,16 @@ module Poker
       end
 
       # if the sets match, return nil
+    end
+
+    def first_set_index(hand, size)
+      set = hand.all_sets[size].first
+      Hand.card_index(set.first.rank)
+    end
+
+    def last_set_index(hand, size)
+      set = hand.all_sets[size].last
+      Hand.card_index(set.first.rank)
     end
 
     def high_card
