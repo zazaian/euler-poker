@@ -56,6 +56,9 @@ module Poker
       highest_card_wins
     end
 
+    def hand_with_best_unpaired_cards
+    end
+
     private
 
     def highest_card_wins

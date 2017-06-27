@@ -108,6 +108,10 @@ module Poker
       end.sort.reverse
     end
 
+    def total_unpaired_cards
+      all_sets[1].size
+    end
+
     def sort_ranks_by_index(x, y)
       Card::RANKS.index(x) <=> Card::RANKS.index(y)
     end

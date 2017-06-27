@@ -143,4 +143,9 @@ describe Poker::Hand do
     hand = described_class.new %w[8S 8D 7S 4D TH]
     expect(hand.unpaired_card_indexes).to eq([8, 5, 2])
   end
+
+  it "knows how many total unpaired cards it has" do
+    hand = described_class.new %w[8S 8D 7S 4D TH]
+    expect(hand.total_unpaired_cards).to eq(3)
+  end
 end
