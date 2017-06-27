@@ -111,13 +111,13 @@ describe Poker::Hand do
     # full house, a two-pair and a three-pair
     hand = described_class.new %w[4D 4H 4C 8C 8D]
 
-    pair1 = hand.all_pairs[2].first
+    pair1 = hand.all_sets[2].first
     expect([
       pair1.first.rank,
       pair1.last.rank
     ]).to eq %w[8 8]
 
-    pair2 = hand.all_pairs[3].first
+    pair2 = hand.all_sets[3].first
     expect([
       pair2.first.rank,
       pair2[1].rank,

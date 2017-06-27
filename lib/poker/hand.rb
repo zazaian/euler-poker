@@ -84,11 +84,11 @@ module Poker
     end
 
     def n_of_a_kind?(n, size: 1)
-      all_pairs[n] && all_pairs[n].size == size
+      all_sets[n] && all_sets[n].size == size
     end
 
-    def all_pairs
-      @all_pairs ||= cards.group_by(&:rank).values.group_by(&:size)
+    def all_sets
+      @all_sets ||= cards.group_by(&:rank).values.group_by(&:size)
     end
 
     def consecutive?
@@ -97,8 +97,18 @@ module Poker
 
     def sorted_ranks
       @sorted_ranks ||= cards.collect {|c| c.rank }.sort do |x, y|
-        Card::RANKS.index(x) <=> Card::RANKS.index(y)
+        sort_ranks_by_index(x, y)
       end
+    end
+
+    def sorted_non_pairs
+      all_sets[1].collect {|c| c.rank }.sort do |x, y|
+        sort_ranks_by_index(x, y)
+      end
+    end
+
+    def sort_ranks_by_index(x, y)
+      Card::RANKS.index(x) <=> Card::RANKS.index(y)
     end
 
     def ace_high
