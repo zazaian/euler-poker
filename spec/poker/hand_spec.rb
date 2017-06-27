@@ -138,4 +138,9 @@ describe Poker::Hand do
     hand = described_class.new %w[8S 8D 7S 7D TH]
     expect(hand.best_hand_index).to eq 7
   end
+
+  it "can ferret out sorted non-pairs" do
+    hand = described_class.new %w[8S 8D 7S 4D TH]
+    expect(hand.sorted_non_pairs).to eq(%w[T 7 4])
+  end
 end
