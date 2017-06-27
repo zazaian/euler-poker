@@ -37,8 +37,12 @@ module Poker
     end
 
     def two_of_a_kind
-      pair1 = hand1.all_pairs[2].first
-      pair2 = hand2.all_pairs[2].first
+      n_of_a_kind(2)
+    end
+
+    def n_of_a_kind(set_size)
+      pair1 = hand1.all_pairs[set_size].first
+      pair2 = hand2.all_pairs[set_size].first
 
       index1 = Hand.card_index(pair1.first.rank)
       index2 = Hand.card_index(pair2.first.rank)
