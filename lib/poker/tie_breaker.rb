@@ -18,14 +18,15 @@ module Poker
     end
 
     def four_of_a_kind
-      n_of_a_kind(4)
+      n_of_a_kind(4) || best_unpaired_cards
     end
 
     def full_house
+      n_of_a_kind(3) || n_of_a_kind(2)
     end
 
     def flush
-      hand_with_best_unpaired_cards
+      best_unpaired_cards
     end
 
     def straight
@@ -33,37 +34,37 @@ module Poker
     end
 
     def three_of_a_kind
-      n_of_a_kind(3)
+      n_of_a_kind(3) || best_unpaired_cards
     end
 
     def two_pair
     end
 
     def two_of_a_kind
-      n_of_a_kind(2)
+      n_of_a_kind(2) || best_unpaired_cards
     end
 
     def n_of_a_kind(set_size)
-      pair1 = hand1.all_sets[set_size].first
-      pair2 = hand2.all_sets[set_size].first
+      set1 = hand1.all_sets[set_size].first
+      set2 = hand2.all_sets[set_size].first
 
-      index1 = Hand.card_index(pair1.first.rank)
-      index2 = Hand.card_index(pair2.first.rank)
+      index1 = Hand.card_index(set1.first.rank)
+      index2 = Hand.card_index(set2.first.rank)
 
       if index1 > index2
         hand1
       elsif index2 > index1
         hand2
-      else
-        hand_with_best_unpaired_cards
       end
+
+      # if the sets match, return nil
     end
 
     def high_card
       highest_card_wins
     end
 
-    def hand_with_best_unpaired_cards
+    def best_unpaired_cards
       hand1.unpaired_card_indexes.each_with_index do |card_num1, index|
         card_num2 = hand2.unpaired_card_indexes[index]
         return hand1 if card_num1 > card_num2
