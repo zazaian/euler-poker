@@ -18,6 +18,7 @@ module Poker
     end
 
     def four_of_a_kind
+      n_of_a_kind(4)
     end
 
     def full_house
@@ -31,6 +32,7 @@ module Poker
     end
 
     def three_of_a_kind
+      n_of_a_kind(3)
     end
 
     def two_pair

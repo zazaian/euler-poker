@@ -24,12 +24,33 @@ describe Poker::TieBreaker do
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
 
-  it "determines the better of two two-pair hands" do
+  it "determines the better of two hands with a single pair" do
     # two fives
     hand1 = Poker::Hand.new %w[5H 5D 6H 8S TH]
 
     # two kings
     hand2 = Poker::Hand.new %w[KH KD 8C JH AH]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
+
+
+  it "determines the better of two hands with three of a kind" do
+    # three fives
+    hand1 = Poker::Hand.new %w[5H 5D 5H 8S TH]
+
+    # three kings
+    hand2 = Poker::Hand.new %w[KH KD KC JH AH]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
+
+  it "determines the better of two hands with four of a kind" do
+    # four fives
+    hand1 = Poker::Hand.new %w[5H 5D 5H 5S TH]
+
+    # three kings
+    hand2 = Poker::Hand.new %w[KH KD KC KH AH]
 
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
