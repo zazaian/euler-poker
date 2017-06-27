@@ -38,6 +38,29 @@ module Poker
     end
 
     def two_pair
+      # hand1 sets
+      set1 = hand1.all_sets[2].first
+      set2 = hand1.all_sets[2].last
+      index1 = Hand.card_index(set1.first.rank)
+      index2 = Hand.card_index(set2.first.rank)
+      hand1_high = [index1, index2].max
+      hand1_low = [index1, index2].min
+
+      # hand2 sets
+      set3 = hand2.all_sets[2].first
+      set4 = hand2.all_sets[2].last
+      index3 = Hand.card_index(set3.first.rank)
+      index4 = Hand.card_index(set4.first.rank)
+      hand2_high = [index3, index4].max
+      hand2_low = [index3, index4].min
+
+      if hand1_high > hand2_high
+        hand1
+      elsif hand2_high > hand1_high
+        hand2
+      else
+        hand1_low > hand2_low ? hand1 : hand2
+      end
     end
 
     def two_of_a_kind

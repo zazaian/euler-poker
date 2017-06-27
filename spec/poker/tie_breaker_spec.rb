@@ -101,4 +101,22 @@ describe Poker::TieBreaker do
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
 
+  it "determines the better of two two-pair hands" do
+    # tens over eights
+    hand1 = Poker::Hand.new %w[TH TD 8C 8S 4H]
+
+    # aces over eights
+    hand2 = Poker::Hand.new %w[AH AD 8C 8S 3H]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+
+
+    # aces over fives
+    hand1 = Poker::Hand.new %w[AH AD 5C 5S 4H]
+
+    # aces over eights
+    hand2 = Poker::Hand.new %w[AH AD 8C 8S 3H]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
 end
