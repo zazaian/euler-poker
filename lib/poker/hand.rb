@@ -132,9 +132,9 @@ module Poker
       hand1_index = hand1.best_hand_index
       hand2_index = hand2.best_hand_index
 
-      if hand1_index > hand2_index
+      if hand1_index < hand2_index
         hand1
-      elsif hand2_index > hand1_index
+      elsif hand2_index < hand1_index
         hand2
       else
         TieBreaker.new(hand1, hand2).winner

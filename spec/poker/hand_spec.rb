@@ -148,4 +148,67 @@ describe Poker::Hand do
     hand = described_class.new %w[8S 8D 7S 4D TH]
     expect(hand.total_unpaired_cards).to eq(3)
   end
+
+  it "knows a flush is better than two-pair" do
+    # flush, spades
+    hand1 = subject.new %w[4S 5S QS KS AS]
+    # two pair, jacks and nines
+    hand2 = subject.new %w[9S 9D JS JH KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows a straight is better than three of a kind" do
+    # ace-high straight
+    hand1 = subject.new %w[TD JH QD KS AS]
+    # three nines
+    hand2 = subject.new %w[9S 9D 9H QS KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows a royal flush is better than a straight flush" do
+    # royal flush
+    hand1 = subject.new %w[TS JS QS KS AS]
+    # king-high straight flush
+    hand2 = subject.new %w[9S TS JS QS KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows a full house is better than a straight" do
+    # full house, tens over kings
+    hand1 = subject.new %w[TS TD TH KS KD]
+    # king-high straight
+    hand2 = subject.new %w[9S TD JH QC KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows three of a kind is better than two pair" do
+    # three tens
+    hand1 = subject.new %w[TS TD TH AS KD]
+    # two pair, jacks and nines
+    hand2 = subject.new %w[9S 9D JH JC KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows two pair is better than a pair" do
+    # two pair, tens and aces
+    hand1 = subject.new %w[TS TD AH AS KD]
+    # pair of nines
+    hand2 = subject.new %w[9S 9D 4H JC KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
+
+  it "knows a pair is better than high card" do
+    # pair of fives
+    hand1 = subject.new %w[5S 5D 8H AS KD]
+    # king high
+    hand2 = subject.new %w[3S 9D 4H JC KS]
+
+    expect(subject.best_hand(hand1, hand2)).to eq hand1
+  end
 end
