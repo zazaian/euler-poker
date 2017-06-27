@@ -90,4 +90,15 @@ describe Poker::TieBreaker do
 
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
+
+  it "determines the better of two full houses" do
+    # kings over tens
+    hand1 = Poker::Hand.new %w[KH KD KC TS TH]
+
+    # aces over tens
+    hand2 = Poker::Hand.new %w[AH AD AC TS TH]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
+
 end
