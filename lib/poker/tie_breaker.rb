@@ -37,6 +37,13 @@ module Poker
     end
 
     def two_of_a_kind
+      pair1 = hand1.all_pairs[2].first
+      pair2 = hand2.all_pairs[2].first
+
+      index1 = Hand.card_index(pair1.first.rank)
+      index2 = Hand.card_index(pair2.first.rank)
+
+      index1 > index2 ? hand1 : hand2
     end
 
     def high_card

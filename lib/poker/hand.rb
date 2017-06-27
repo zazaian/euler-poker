@@ -109,6 +109,10 @@ module Poker
       Card::RANKS.index(sorted_ranks.last)
     end
 
+    def self.card_index(rank)
+      Card::RANKS.index(rank)
+    end
+
     def better_than?(other_hand)
       # check if this hand is better than the other hand
       return true if best_hand_index < other_hand.best_hand_index
