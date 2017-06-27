@@ -101,11 +101,11 @@ module Poker
       end
     end
 
-    # sort non-paired cards highest -> lowest
-    def sorted_non_pairs
-      all_sets[1].collect {|set| set.first.rank }.sort do |x, y|
-        sort_ranks_by_index(x, y)
-      end.reverse
+    # collect the rank indices
+    def unpaired_card_indexes
+      @unpaired_card_indexes ||= all_sets[1].collect do |set|
+        Card::RANKS.index(set.first.rank)
+      end.sort.reverse
     end
 
     def sort_ranks_by_index(x, y)

@@ -141,6 +141,6 @@ describe Poker::Hand do
 
   it "can ferret out sorted non-pairs" do
     hand = described_class.new %w[8S 8D 7S 4D TH]
-    expect(hand.sorted_non_pairs).to eq(%w[T 7 4])
+    expect(hand.unpaired_card_indexes).to eq([8, 5, 2])
   end
 end
