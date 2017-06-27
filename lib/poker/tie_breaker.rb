@@ -25,6 +25,7 @@ module Poker
     end
 
     def flush
+      hand_with_best_unpaired_cards
     end
 
     def straight
@@ -49,7 +50,13 @@ module Poker
       index1 = Hand.card_index(pair1.first.rank)
       index2 = Hand.card_index(pair2.first.rank)
 
-      index1 > index2 ? hand1 : hand2
+      if index1 > index2
+        hand1
+      elsif index2 > index1
+        hand2
+      else
+        hand_with_best_unpaired_cards
+      end
     end
 
     def high_card

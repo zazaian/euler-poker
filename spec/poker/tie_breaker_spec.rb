@@ -45,6 +45,16 @@ describe Poker::TieBreaker do
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
 
+  it "determines the better of two hands with three of a kind, high card" do
+    # three fives, eight high
+    hand1 = Poker::Hand.new %w[5H 5D 5H 8S 4H]
+
+    # three fives, ace high
+    hand2 = Poker::Hand.new %w[5H 5D 5C AH 3H]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
+
   it "determines the better of two hands with four of a kind" do
     # four fives
     hand1 = Poker::Hand.new %w[5H 5D 5H 5S TH]
@@ -67,6 +77,16 @@ describe Poker::TieBreaker do
     hand1 = Poker::Hand.new %w[KH QD TH 9S 3H]
     # K J T 9 3
     hand2 = Poker::Hand.new %w[KH JD TH 9S 3H]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
+
+  it "determines the better of two flushes based on high card" do
+    # King high flush
+    hand1 = Poker::Hand.new %w[KH QH TH 8H 3H]
+
+    # Ace high flush
+    hand2 = Poker::Hand.new %w[AS QS TS 8S 3S]
 
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
