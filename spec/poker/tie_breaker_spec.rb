@@ -54,4 +54,20 @@ describe Poker::TieBreaker do
 
     expect(subject.new(hand1, hand2).winner).to eq hand2
   end
+
+  it "determines which hands has better unpaired cards" do
+    # A K 2
+    hand1 = Poker::Hand.new %w[5H 5D AH KS 2H]
+    # A K Q
+    hand2 = Poker::Hand.new %w[5H 5D AC KH QH]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+
+    # K Q T 9 3
+    hand1 = Poker::Hand.new %w[KH QD TH 9S 3H]
+    # K J T 9 3
+    hand2 = Poker::Hand.new %w[KH JD TH 9S 3H]
+
+    expect(subject.new(hand1, hand2).winner).to eq hand2
+  end
 end

@@ -57,7 +57,7 @@ module Poker
     end
 
     def hand_with_best_unpaired_cards
-      hand1.unpaired_card_indexes.each_with_index |card_num1, index|
+      hand1.unpaired_card_indexes.each_with_index do |card_num1, index|
         card_num2 = hand2.unpaired_card_indexes[index]
         return hand1 if card_num1 > card_num2
         return hand2 if card_num2 > card_num1
