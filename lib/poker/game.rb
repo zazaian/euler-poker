@@ -1,6 +1,6 @@
 module Poker
   class Game
-    attr_reader :sanitized_hands, :player1_wins, :player2_wins
+    attr_reader :sanitized_hands, :player1_wins, :player2_wins, :total_hands
 
     def initialize(hands_file)
       # read the hands and truncate the newline chars
@@ -8,6 +8,7 @@ module Poker
 
       @player1_wins = 0
       @player2_wins = 0
+      @total_hands = 0
     end
 
     def play
@@ -20,16 +21,17 @@ module Poker
         hand1 = Hand.new(player1_cards)
         hand2 = Hand.new(player2_cards)
 
-        if hand1.better_than?(hand2)
-          puts "Player 1 wins!!"
+        best_hand = Hand.best_hand(hand1, hand2)
+
+        if hand1 == best_hand
           @player1_wins += 1
         else
-          puts "Player 2 wins!!"
           @player2_wins += 1
         end
-
-        puts "Totals - Player 1: #{player1_wins}, Player 2: #{player2_wins}"
+        @total_hands += 1
       end
+
+      puts "Total hands: #{@total_hands}, Player 1: #{player1_wins}, Player 2: #{player2_wins}"
     end
   end
 end

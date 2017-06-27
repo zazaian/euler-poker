@@ -128,12 +128,17 @@ module Poker
       Card::RANKS.index(rank)
     end
 
-    def better_than?(other_hand)
-      # check if this hand is better than the other hand
-      return true if best_hand_index < other_hand.best_hand_index
+    def self.best_hand(hand1, hand2)
+      hand1_index = hand1.best_hand_index
+      hand2_index = hand2.best_hand_index
 
-      # if not, break the tie
-      TieBreaker.new(self, other_hand).winner == self
+      if hand1_index > hand2_index
+        hand1
+      elsif hand2_index > hand1_index
+        hand2
+      else
+        TieBreaker.new(hand1, hand2).winner
+      end
     end
 
     private
